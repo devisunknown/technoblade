@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Akwaaba Market | Authentic Ghanaian Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#6a3700",
+                    "background": "#f8faf6",
+                    "on-primary-fixed": "#002117",
+                    "surface-tint": "#2b6954",
+                    "surface-container-highest": "#e1e3e0",
+                    "on-primary": "#ffffff",
+                    "surface": "#f8faf6",
+                    "on-primary-container": "#80bea6",
+                    "tertiary": "#4a2400",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#eceeeb",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "secondary-container": "#fea619",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "on-tertiary-fixed": "#2f1500",
+                    "inverse-surface": "#2e312f",
+                    "outline-variant": "#bfc9c3",
+                    "on-primary-fixed-variant": "#0b513d",
+                    "tertiary-fixed": "#ffdcc3",
+                    "primary-container": "#064e3b",
+                    "on-background": "#191c1b",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "on-surface-variant": "#404944",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e1e3e0",
+                    "primary-fixed": "#b0f0d6",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e7e9e5",
+                    "outline": "#707974",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "inverse-primary": "#95d3ba",
+                    "inverse-on-surface": "#eff1ee",
+                    "surface-dim": "#d8dbd7",
+                    "on-secondary-container": "#684000",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#855300",
+                    "surface-bright": "#f8faf6",
+                    "secondary-fixed": "#ffddb8",
+                    "on-tertiary-container": "#ff9939",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "primary": "#003527",
+                    "on-secondary-fixed": "#2a1700",
+                    "surface-container-low": "#f2f4f1",
+                    "primary-fixed-dim": "#95d3ba"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "container-margin-desktop": "auto",
+                    "xl": "32px",
+                    "container-margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "price-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "price-lg": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8faf6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .product-card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-40 bg-surface dark:bg-surface-dim shadow-sm w-full">
+<div class="flex justify-between items-center px-4 h-16 w-full max-w-7xl mx-auto">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">DABSTELL 15 ENTERPRISE</h1>
+<div class="hidden md:flex flex-1 mx-8 max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-body-sm" placeholder="Search products..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full relative">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-secondary text-[10px] flex items-center justify-center text-white rounded-full">3</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto pb-24">
+<!-- Search Bar Mobile -->
+<div class="px-4 py-4 md:hidden">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-12 pl-10 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:outline-none focus:border-primary transition-all text-body-sm shadow-sm" placeholder="Search authentic goods..." type="text"/>
+</div>
+</div>
+<!-- Hero Promo (Bento Style) -->
+<section class="px-4 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-auto md:h-64">
+<div class="md:col-span-2 relative overflow-hidden rounded-xl bg-primary-container p-8 flex flex-col justify-center min-h-[160px]">
+<div class="z-10">
+<h2 class="text-on-primary-container font-headline-lg text-headline-lg mb-2">Artisanal Craftsmanship</h2>
+<p class="text-on-primary-container/80 text-body-lg mb-4 max-w-xs">Directly from the heart of Accra to your doorstep.</p>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-xl font-label-md text-label-md hover:scale-105 transition-transform">Explore Local</button>
+</div>
+<div class="absolute -right-10 -bottom-10 w-64 h-64 bg-primary-fixed opacity-10 rounded-full blur-3xl"></div>
+</div>
+<div class="relative overflow-hidden rounded-xl bg-secondary-fixed p-6 flex flex-col justify-end min-h-[160px]">
+<h3 class="text-on-secondary-fixed font-title-md text-title-md mb-1">New Arrivals</h3>
+<p class="text-on-secondary-fixed-variant text-body-sm">Shop the latest trends in Kente fashion.</p>
+</div>
+</div>
+</section>
+<!-- Category Chips -->
+<section class="mb-6">
+<div class="flex overflow-x-auto no-scrollbar gap-3 px-4 py-2">
+<button class="flex-none px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md transition-all scale-95 md:scale-100">All</button>
+<button class="flex-none px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-outline-variant transition-all">Electronics</button>
+<button class="flex-none px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-outline-variant transition-all">Fashion</button>
+<button class="flex-none px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-outline-variant transition-all">Groceries</button>
+<button class="flex-none px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-outline-variant transition-all">Home Decor</button>
+<button class="flex-none px-6 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-outline-variant transition-all">Accessories</button>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="px-4">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-title-md text-title-md">Recommended for you</h2>
+<button class="text-primary text-label-md font-label-md flex items-center gap-1">
+                    View all <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A premium jar of Organic Shea Butter with minimalist gold and cream labeling, sitting on a natural wood surface with soft, bright daylight and green foliage in the background. The lighting is warm and organic, highlighting the smooth texture of the product. Modern luxury skincare aesthetic with high-key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGHYQaGw87xZyzveAqnzIqIpcrU0ZpTKtdsO2NtZbqLMEHNtGNWAVdwv1h59LymjPQ5_6osEquHor9887uL2PhKMPF7CwcJS3RvFn8WIWDDscTWi06jptXWEb-sfIGdm_vEykd1oGJVUjJ144gkNmD9KovfhZH8m1IwapQP5S0Sv5RbbJA6qTKX0icxpSBc4eO6lzQDy76mBTH352gJH_SEIBPAOZp8Typ5jUJJiimdqrO8l_3vK5sVCDf716YUdhpQG6xdccxXY31"/>
+<button class="absolute top-2 right-2 p-1.5 bg-white/80 backdrop-blur-md rounded-full shadow-sm text-error">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">SKINCARE</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">Organic Shea Butter</h3>
+<div class="mt-auto">
+<p class="font-price-lg text-price-lg text-primary mb-3">₵ 120.00</p>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A sleek, modern Smartphone X in a deep forest green color, showcased on a minimalist reflective glass surface. The background is a sophisticated gradient of deep greens and grays. Sharp product photography with professional studio lighting and clean highlights. Corporate modern tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwozoiUUjobmGUDzsW0qOfwd0UkEsEkn1cV7KMYvGY6HvCtgE7-53TbVEnMrM3X12382sAGREa3EJUCWQqrFszMpUoTI4v-ScafYCX9VU4zyRWd7rd1kL4ARVN_RqlmRuIMR-wVzH6g0RBEXF1qKTPmTuBUtNAYPLhMqaHd4NJMU8chr8EhExvVbJNMverhCiduliqMy47q02GJpjL_DsLzPoQP4Uwdcn1qslV08-yr5D9am7g7RIFR6nEDDdf8MH607Qyw9QSDIez"/>
+<div class="absolute top-2 left-2 bg-secondary-container px-2 py-0.5 rounded text-[10px] font-bold text-on-secondary-container">TRENDING</div>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">TECH</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">Smartphone X - Forest</h3>
+<div class="mt-auto">
+<p class="font-price-lg text-price-lg text-primary mb-3">₵ 4,250.00</p>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant, hand-woven Kente cloth pattern with intricate geometric designs in yellow, green, and red. The fabric is draped elegantly over a minimalist white pedestal. Bright, high-contrast lighting emphasizing the rich textures and premium craftsmanship of the Ghanaian traditional wear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBumFQIqrLj8p-ycPX_0ySc9Ol_g-dP3mRGvhHO_Sxyp2Pt1IQOaekCs65X-I44cm0JV5pDmYXTJwUZnz4qVN4TaatthQou1PZbmyVKb7tsyMCmKrQ0ATA4XlC-J_FzQKycOTbXyD8APZBFORvNPS6C1mAJ7Eq5oDBvWZRVYsFpjrBGA5q8vTygpjtZXfQXF-IIUl5r7hDv4nNDQQ4qleXUqW4xq0PLdfEHcqsVcSamCGoSdlI9XPAnwuBjQ2cKJBe8i3ajzo1dqZdL"/>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">TEXTILES</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">Premium Bonwire Kente</h3>
+<div class="mt-auto">
+<p class="font-price-lg text-price-lg text-primary mb-3">₵ 850.00</p>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern wireless noise-canceling headphones in matte black, placed on a white marble desk next to a small succulent plant. The scene is bright and airy with soft window light, conveying a productive yet serene workspace mood. Minimalist tech accessories lifestyle shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUhf0XtuXpuqj4XhMKCAhbUS6qeUrilrld4QhAhZE24okk0r7gKDW3ntRTQizhVJjpK6qZrdzf-7AltSz6xdCiWjyKd0ek4bihhNDFRDPOyILPbyme09f0k2YiuPPbUehGC3kC1cq7aTQXbWXYXuymypcPlRc9mg3aID6Em23mjUy2FDUqeTD8eRdhDnYsYNGL_j09kwb8tCrOvc-I2J8lDYmTOa7ZxmbQHjT2aovPFGVj0uXMOqXn2CuAF7sGURMie_O7yzqLc4N1"/>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">AUDIO</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">SonicFlow Headphones</h3>
+<div class="mt-auto">
+<p class="font-price-lg text-price-lg text-primary mb-3">₵ 780.00</p>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A handcrafted ceramic bowl with traditional West African earth-tone patterns, filled with fresh tropical fruits like mango and papaya. The background is a clean white kitchen with warm wooden accents. The lighting is soft and natural, emphasizing the organic shape and artistic texture of the pottery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAluPc_Oh4wq6IUeRSJ4FZvRMI0jEILKBakdqWh_PomQ5d2rsPYiIlY_5JTLT6ffD7jLy871pMaogmSm5dmQ0MFL8zsiGLiFsRruT_KoHk-_3pVUXPW9uKyRyNzeZMR233lAUkZphxuPmLuilunL-olSOIBO61zCnF_Ihi_FbbtW0WM-CBvwRFyRJGXtti8L7JaLY06KQvhKL6U0qwuRuJbx2FH9Os5EQDHdMczdMPIClXNR8ARXn1HDHMkCIjNq0dOZPOokkFRfO2t"/>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">HOME</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">Handmade Ceramic Bowl</h3>
+<div class="mt-auto">
+<p class="font-price-lg text-price-lg text-primary mb-3">₵ 240.00</p>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden product-card-shadow flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A collection of gourmet Ghanaian chocolates in various artisanal wrappers, arranged neatly on a dark slate background. A few chocolate pieces are broken to show smooth texture and nuts inside. Moody, high-contrast lighting with golden accents, suggesting premium quality and rich flavor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzhaCyeVBHq2GsQChIEKrOSVrOxaeudD6AwDNqua2zHPxDX3YJ8aG2lV1ynp2zHMC55-ATZhbg1QLmiUK5tYN6zvv--vYdCXsSDV_SlK29_8NdeD-erCfk-fKjV7xNynEgSapKITQctyL3I0MwNzRWY1Ac9m1bgvc1mlXnRpPrHLO1R9ztjGOkZoH6elb_KKfH-h-BBN7Y2_MWbdZ8Wul3LhEqkuCv-cbWME-FOhGpHW8mp4E1gyGfcHyzFCsPWensTzRylf_YEh5H"/>
+<div class="absolute top-2 left-2 bg-error text-white px-2 py-0.5 rounded text-[10px] font-bold">15% OFF</div>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<p class="text-label-md text-outline mb-1 font-label-md">FOOD</p>
+<h3 class="font-body-lg text-body-lg text-on-surface truncate mb-2">Artisan Cocoa Pack</h3>
+<div class="mt-auto">
+<div class="flex items-center gap-2 mb-1">
+<p class="font-price-lg text-price-lg text-primary">₵ 65.00</p>
+<p class="text-label-md text-outline line-through">₵ 80.00</p>
+</div>
+<button class="w-full bg-primary py-2.5 rounded-xl text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-outline-variant shadow-[0_-4px_12px_rgba(0,0,0,0.04)] rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-md text-label-md">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Simple Interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Add to Cart toast simulation
+        const cartButtons = document.querySelectorAll('button:has(span:contains("add_shopping_cart"))');
+        document.body.addEventListener('click', (e) => {
+            if(e.target.closest('button') && e.target.closest('button').innerText.includes('Add to Cart')) {
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-on-surface text-surface px-6 py-3 rounded-full shadow-lg z-50 animate-bounce font-label-md text-label-md';
+                toast.innerText = 'Added to your market bag!';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+        });
+    </script>
+</body></html>

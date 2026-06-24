@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Akwaaba Market | Product Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#6a3700",
+                        "background": "#f8faf6",
+                        "on-primary-fixed": "#002117",
+                        "surface-tint": "#2b6954",
+                        "surface-container-highest": "#e1e3e0",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8faf6",
+                        "on-primary-container": "#80bea6",
+                        "tertiary": "#4a2400",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceeeb",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "secondary-container": "#fea619",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c1b",
+                        "on-tertiary-fixed": "#2f1500",
+                        "inverse-surface": "#2e312f",
+                        "outline-variant": "#bfc9c3",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "tertiary-fixed": "#ffdcc3",
+                        "primary-container": "#064e3b",
+                        "on-background": "#191c1b",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "on-surface-variant": "#404944",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e1e3e0",
+                        "primary-fixed": "#b0f0d6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e7e9e5",
+                        "outline": "#707974",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "inverse-primary": "#95d3ba",
+                        "inverse-on-surface": "#eff1ee",
+                        "surface-dim": "#d8dbd7",
+                        "on-secondary-container": "#684000",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#855300",
+                        "surface-bright": "#f8faf6",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-container": "#ff9939",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "primary": "#003527",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-container-low": "#f2f4f1",
+                        "primary-fixed-dim": "#95d3ba"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "container-margin-desktop": "auto",
+                        "xl": "32px",
+                        "container-margin-mobile": "16px",
+                        "xs": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "price-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "price-lg": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopNavBar (Shared Component Logic) -->
+<nav class="sticky top-0 z-40 flex justify-between items-center px-4 h-16 w-full max-w-7xl mx-auto bg-surface dark:bg-surface-dim shadow-sm">
+<div class="flex items-center gap-4">
+
+    <form method="" action="{%url 'client' %}">
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+</form>
+
+<a href="{% url 'client' %}"><span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">DABSTELL 15 ENTERPRISE</span></a><
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Container -->
+<main class="max-w-7xl mx-auto">
+<!-- Product Carousel Section -->
+<section class="relative w-full aspect-square md:aspect-video overflow-hidden">
+<div class="flex h-full transition-transform duration-500 ease-out hide-scrollbar overflow-x-auto snap-x snap-mandatory" id="carousel">
+<!-- Slide 1 -->
+<div class="min-w-full h-full snap-center">
+<img class="w-full h-full object-cover" data-alt="A luxurious, high-resolution close-up of authentic Ghanaian Kente cloth, showcasing intricate hand-woven geometric patterns in vibrant shades of gold, deep green, and rich crimson. The fabric texture is tactile and detailed, captured under soft, warm boutique lighting that highlights the shimmering silk and cotton threads. The background is a clean, neutral minimalist studio setting, emphasizing the artisanal craftsmanship and premium quality of the textile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-uP2UPtS01XlU-NCpaIKNKRI5K0v1Grd_RRUMwIZi4owrUm3g1O22mZC3ABxavAQroX7VWDTVl6iVZUhbM_RC3ci5P1A7C9-yu5vfg-65mBPZ5VRiCZ1IfF7wyE2BI4UKgOV0n2CvyVwhATvPgx3I6x-FaQCWb2ODu4nDKDgFA6mdNtD5x6iZlydLR8K-7eA4D2GbsCoF5O38VIRyNMx3w9YVM23jDDkYniBo4pMAzZnB8fPcF5FzoxGuoN2o6dC-EwMQS6kE7IKU"/>
+</div>
+<!-- Slide 2 -->
+<div class="min-w-full h-full snap-center">
+<img class="w-full h-full object-cover" data-alt="An wide-angle architectural shot of the full length of a traditional Kente cloth draped elegantly over a minimalist wooden frame. The scene is set in a bright, modern light-mode gallery with polished concrete floors and large windows letting in diffused natural daylight. The color palette of the cloth includes intense black, bright yellow, and emerald green, creating a striking contrast against the serene, white-walled environment. The mood is sophisticated and culturally rich." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgbUG3gj6vSwOYQ4BZ6YAptY44vxeVcJ_bd_EmEVtSF98VUIO9vdID8qXG_pPB4u0Ky3U8nUNuPGgaluWyIr456SZovPZhY_AWoDkeg0ZQkW31_Hmv2wa_H7gPW_sJZevc4MXMSGhS8hhOYpT0s6ETA7u7GMGN0f58wZ6NHv89BDqRwY0KHsLUEOJso4Z596BpzF4sqWHROjWDoSP2OEVMb7t3nQsljm_guDtmMhN6xCtl_uVyn8CkQOC7EntXpbWuxx_Mqkk_k_EJ"/>
+</div>
+<!-- Slide 3 -->
+<div class="min-w-full h-full snap-center">
+<img class="w-full h-full object-cover" data-alt="A lifestyle shot featuring a stylish individual wearing a modern garment crafted from authentic Kente cloth. The setting is a sun-drenched outdoor courtyard in Accra, with lush tropical greenery and warm earth-toned terracotta walls. The lighting is golden hour, casting long, soft shadows that enhance the vibrant textures and colors of the fabric. The overall aesthetic is approachable, premium, and contemporary, blending tradition with modern fashion sensibilities." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZvCS7Kp9sqOnorp3XlbH9pSRz4X4emGjeeCAboxz2ajtd0HipOwTeLac9oSTgk4TRpMJmtCp9G_AGf7RPzSGR4S1h9qxHhNBqgs9Eq9_JyqAY080xnL_AxZN3GkqGAfqLlBSYVp6kWirH84wAeyXUxA_WhwyU6AcrFlGjS_GPmLGdil1c-EGGpdASRChe-y8aa1-l-3k6AIkVAEatarl_kX21jUJzGNLyGgXLyZWDMXKj5io2ffQHJ-ay9X0Nz69j5y-b-l-qinrM"/>
+</div>
+</div>
+<!-- Carousel Indicators -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-white/50"></div>
+<div class="w-2 h-2 rounded-full bg-white/50"></div>
+</div>
+<!-- Wishlist Button -->
+<button class="absolute top-4 right-4 bg-surface/80 backdrop-blur-md p-3 rounded-full shadow-lg text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</section>
+<!-- Product Details Section -->
+<div class="px-gutter py-lg space-y-lg md:grid md:grid-cols-2 md:gap-12 md:items-start">
+<div class="space-y-md">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Handcrafted Heritage</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Authentic Kente Cloth - Royal Bonwire Edition</h1>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-md text-label-md">In Stock</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary">₵1,850.00</span>
+<span class="font-body-sm text-body-sm text-outline line-through">₵2,100.00</span>
+</div>
+<!-- Rating -->
+<div class="flex items-center gap-2 text-secondary">
+<div class="flex">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">star_half</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(48 Reviews)</span>
+</div>
+<div class="h-[1px] bg-outline-variant w-full"></div>
+<!-- Quantity and Options -->
+<div class="space-y-md">
+<p class="font-title-md text-title-md text-on-surface">Quantity</p>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden">
+<button class="p-3 hover:bg-surface-container-high transition-colors active:scale-90" onclick="decrementQty()">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="w-12 text-center font-title-md text-title-md" id="qty">1</span>
+<button class="p-3 hover:bg-surface-container-high transition-colors active:scale-90" onclick="incrementQty()">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Limit: 5 items per customer</span>
+</div>
+</div>
+</div>
+<!-- Tabs/Description Section -->
+<div class="space-y-md">
+<div class="flex border-b border-outline-variant">
+<button class="px-6 py-3 font-label-md text-label-md text-primary border-b-2 border-primary">Description</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant">Specifications</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant">Origin</button>
+</div>
+<div class="space-y-4">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Experience the majesty of the Royal Bonwire Kente, a masterpiece of Ghanaian textile art. Hand-woven on traditional looms by master weavers in the Ashanti region, this cloth features the iconic "Adwinasa" pattern—symbolizing excellence and creative perfection.
+                    </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5">verified</span>
+<span class="font-body-sm text-body-sm">100% Hand-woven silk and cotton blend</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5">straighten</span>
+<span class="font-body-sm text-body-sm">Dimensions: 4 yards x 60 inches</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5">local_shipping</span>
+<span class="font-body-sm text-body-sm">Global shipping available within 7-14 days</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Trust Badges Bento -->
+<section class="px-gutter py-xl bg-surface-container-lowest">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-surface-container rounded-xl flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">eco</span>
+<span class="font-label-md text-label-md">Sustainable Materials</span>
+</div>
+<div class="p-4 bg-surface-container rounded-xl flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">hand_gesture</span>
+<span class="font-label-md text-label-md">Artisan Made</span>
+</div>
+<div class="p-4 bg-surface-container rounded-xl flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">shield_lock</span>
+<span class="font-label-md text-label-md">Authenticity Guaranteed</span>
+</div>
+<div class="p-4 bg-surface-container rounded-xl flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">support_agent</span>
+<span class="font-label-md text-label-md">Expert Support</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 right-0 p-gutter bg-surface/90 backdrop-blur-xl border-t border-outline-variant z-50 flex items-center justify-between gap-4">
+<div class="hidden md:flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Price</span>
+<span class="font-price-lg text-price-lg text-primary" id="total-price">₵1,850.00</span>
+</div>
+<div class="flex-1 flex gap-3">
+<button class="flex-[1] flex items-center justify-center gap-2 h-14 rounded-xl border-2 border-primary text-primary font-title-md hover:bg-surface-container-high transition-all active:scale-95">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+<span class="hidden sm:inline">Add to Cart</span>
+</button>
+<button class="flex-[2] bg-secondary text-white font-title-md h-14 rounded-xl shadow-lg hover:brightness-110 transition-all active:scale-95">
+                Buy Now
+            </button>
+</div>
+</div>
+<script>
+        let quantity = 1;
+        const basePrice = 1850.00;
+        const qtyDisplay = document.getElementById('qty');
+        const totalPriceDisplay = document.getElementById('total-price');
+
+        function updateDisplay() {
+            qtyDisplay.innerText = quantity;
+            if(totalPriceDisplay) {
+                totalPriceDisplay.innerText = `₵${(quantity * basePrice).toLocaleString('en-GH', { minimumFractionDigits: 2 })}`;
+            }
+        }
+
+        function incrementQty() {
+            if (quantity < 5) {
+                quantity++;
+                updateDisplay();
+            }
+        }
+
+        function decrementQty() {
+            if (quantity > 1) {
+                quantity--;
+                updateDisplay();
+            }
+        }
+
+        // Micro-interaction for carousel dots
+        const carousel = document.getElementById('carousel');
+        const dots = document.querySelectorAll('.absolute.bottom-6 div');
+        
+        carousel.addEventListener('scroll', () => {
+            const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+            dots.forEach((dot, i) => {
+                dot.className = `w-2 h-2 rounded-full transition-all ${i === index ? 'bg-primary w-4' : 'bg-white/50'}`;
+            });
+        });
+    </script>
+</body></html>
