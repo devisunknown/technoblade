@@ -1,401 +1,98 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Akwaaba Market | Admin Portal</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-tertiary-fixed-variant": "#6e3900",
-                    "on-error-container": "#93000a",
-                    "on-background": "#ffffff",
-                    "surface-container-low": "#111111",
-                    "primary-fixed": "#b0f0d6",
-                    "on-tertiary": "#ffffff",
-                    "surface": "#0a0a0a",
-                    "tertiary": "#4a2400",
-                    "surface-tint": "#2b6954",
-                    "surface-dim": "#1a1c1b",
-                    "tertiary-container": "#6a3700",
-                    "surface-variant": "#1f1f1f",
-                    "on-secondary-container": "#684000",
-                    "on-primary-fixed-variant": "#0b513d",
-                    "tertiary-fixed": "#ffdcc3",
-                    "error": "#ff5252",
-                    "primary-fixed-dim": "#95d3ba",
-                    "secondary": "#855300",
-                    "on-tertiary-fixed": "#2f1500",
-                    "inverse-surface": "#eff1ee",
-                    "on-error": "#ffffff",
-                    "surface-bright": "#1f1f1f",
-                    "on-secondary-fixed": "#2a1700",
-                    "tertiary-fixed-dim": "#ffb77d",
-                    "outline": "#888888",
-                    "secondary-fixed-dim": "#ffb95f",
-                    "secondary-fixed": "#ffddb8",
-                    "background": "#0a0a0a",
-                    "on-surface": "#ededed",
-                    "on-primary": "#ffffff",
-                    "surface-container-high": "#282828",
-                    "outline-variant": "#333333",
-                    "secondary-container": "#fea619",
-                    "primary-container": "#064e3b",
-                    "on-primary-container": "#80bea6",
-                    "on-tertiary-container": "#ff9939",
-                    "inverse-on-surface": "#191c1b",
-                    "surface-container-highest": "#333333",
-                    "error-container": "#410002",
-                    "on-primary-fixed": "#002117",
-                    "inverse-primary": "#95d3ba",
-                    "surface-container": "#141414",
-                    "on-secondary": "#ffffff",
-                    "primary": "#064e3b",
-                    "surface-container-lowest": "#000000",
-                    "on-surface-variant": "#a1a1a1",
-                    "on-secondary-fixed-variant": "#653e00"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "lg": "24px",
-                    "container-margin-mobile": "16px",
-                    "md": "16px",
-                    "xs": "4px",
-                    "base": "8px",
-                    "xl": "32px",
-                    "sm": "8px",
-                    "container-margin-desktop": "auto",
-                    "gutter": "16px"
-            },
-            "fontFamily": {
-                    "label-md": ["Inter"],
-                    "display-lg": ["Inter"],
-                    "title-md": ["Inter"],
-                    "body-lg": ["Inter"],
-                    "headline-lg": ["Inter"],
-                    "price-lg": ["Inter"],
-                    "headline-lg-mobile": ["Inter"],
-                    "body-sm": ["Inter"]
-            },
-            "fontSize": {
-                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
-                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "price-lg": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
-                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            background-color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            color: #ededed;
-        }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .glass-effect {
-            backdrop-filter: blur(8px);
-            background-color: rgba(10, 10, 10, 0.8);
-        }
-        .metric-card {
-            background: #111111;
-            border: 1px solid #1f1f1f;
-            transition: border-color 0.2s;
-        }
-        .metric-card:hover {
-            border-color: #333333;
-        }
-        .chart-glow {
-            filter: drop-shadow(0 0 8px rgba(6, 78, 59, 0.4));
-        }
-    </style>
-</head>
-<body class="bg-surface text-on-surface">
-<!-- Side Navigation Shell -->
-<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container border-r border-outline-variant flex-col h-full py-lg px-md z-50">
-<div class="mb-xl px-md flex items-center gap-base">
-<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-white text-[20px]">storefront</span>
-</div>
-<div>
-<h1 class="font-headline-lg text-[20px] font-black text-on-surface">Akwaaba</h1>
-</div>
-</div>
-<nav class="flex-1 space-y-base">
-<a class="flex items-center gap-base px-md py-sm bg-surface-container-high text-on-surface rounded-lg transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">dashboard</span>
-<span class="font-label-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-base px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-<span class="font-label-md">Orders</span>
-</a>
-<a class="flex items-center gap-base px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">inventory_2</span>
-<span class="font-label-md">Products</span>
-</a>
-<a class="flex items-center gap-base px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">group</span>
-<span class="font-label-md">Customers</span>
-</a>
-<a class="flex items-center gap-base px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">bar_chart</span>
-<span class="font-label-md">Analytics</span>
-</a>
-<a class="flex items-center gap-base px-md py-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" href="#">
-<span class="material-symbols-outlined text-[20px]">settings</span>
-<span class="font-label-md">Settings</span>
-</a>
-</nav>
-<div class="mt-auto pt-md border-t border-outline-variant flex items-center gap-base">
-<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
-<img alt="Admin" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1uu6VLINxl7ABLKElcTwCn-83NxOqN_HMF1Cs8Duhg-17kN13i-oBKBkmg5TcFG-gIusqVMwMWmkpm1qSiJGcU_y7E9HDrmS2YBjrX9103iNI_KXHpMwZkTEnYc2g8PNZ51wHCARLqlkuxadPciUkyIy7MYch3sD2LenXG86M4ezK8Q2aA9Tbpp-wXlBTM_Pa8XFyE1-9DVGBe-TNzcYz8EE5bwMjMMUMLYzNSBgg1URoaoZGgMXLSTIwk1az4S0npDIywgDtLJZU">
-</div>
-<div class="truncate">
-<p class="font-label-md text-on-surface truncate">Kwesi Mensah</p>
-<p class="text-[10px] text-on-surface-variant">you@akwaaba.com</p>
-</div>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="md:ml-64 min-h-screen flex flex-col">
-<!-- Top Navigation -->
-<header class="w-full sticky top-0 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-16 px-lg z-40">
-<div class="flex items-center gap-md">
-<button class="md:hidden p-sm text-on-surface">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<div class="hidden md:flex items-center gap-sm text-on-surface-variant text-[13px]">
-<span class="hover:text-on-surface cursor-pointer">Help</span>
-<span class="hover:text-on-surface cursor-pointer">Docs</span>
-<button class="flex items-center gap-xs px-sm py-1 border border-outline-variant rounded-md hover:bg-surface-container-high text-on-surface">
-<span class="material-symbols-outlined text-[16px]">chat_bubble</span>
-<span class="">Feedback</span>
-</button>
-</div>
-</div>
-<div class="flex items-center gap-sm"><button class="p-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" aria-label="Toggle theme">
-  <span class="material-symbols-outlined text-[20px] block dark:hidden">light_mode</span>
-  <span class="material-symbols-outlined text-[20px] hidden dark:block">dark_mode</span>
-</button>
-<button class="p-sm text-on-surface-variant hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined text-[20px]">notifications</span>
-</button>
-<button class="p-sm text-on-surface-variant hover:text-on-surface transition-colors">
-<span class="material-symbols-outlined text-[20px]">search</span>
-</button>
-</div>
-</header>
-<!-- Page Canvas -->
-<div class="p-lg md:p-xl space-y-xl max-w-[1400px]">
-<div class="flex flex-col gap-sm">
-<h2 class="text-[24px] font-bold text-on-surface">Metrics</h2>
-</div>
-<!-- Metrics Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
-<!-- Deliverability -->
-<div class="metric-card p-xl rounded-2xl space-y-lg">
-<div class="flex justify-between items-start">
-<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Deliverability</p>
-</div>
-<h3 class="text-[42px] font-medium text-on-surface">Good</h3>
-<div class="space-y-md pt-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-blue-500"></div>
-<span class="text-body-sm text-on-surface">Sent</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">29,486</span>
-<span class="text-body-sm text-on-surface">100%</span>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="text-body-sm text-on-surface">Delivered</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">29,486</span>
-<span class="text-body-sm text-on-surface">100%</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Reputation -->
-<div class="metric-card p-xl rounded-2xl space-y-lg">
-<div class="flex justify-between items-start">
-<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Reputation</p>
-</div>
-<h3 class="text-[42px] font-medium text-on-surface">Good</h3>
-<div class="space-y-md pt-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-error"></div>
-<span class="text-body-sm text-on-surface">Bounced</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">546</span>
-<span class="text-body-sm text-on-surface">1.85%</span>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-<span class="text-body-sm text-on-surface">Complained</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">2</span>
-<span class="text-body-sm text-on-surface">0.01%</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Engagement -->
-<div class="metric-card p-xl rounded-2xl space-y-lg">
-<div class="flex justify-between items-start">
-<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Engagement</p>
-</div>
-<h3 class="text-[42px] font-medium text-error">Poor</h3>
-<div class="space-y-md pt-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-purple-500"></div>
-<span class="text-body-sm text-on-surface">Opened</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">0</span>
-<span class="text-body-sm text-on-surface">0%</span>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<div class="w-2 h-2 rounded-full bg-gray-500"></div>
-<span class="text-body-sm text-on-surface">Unsubscribed</span>
-</div>
-<div class="flex gap-md">
-<span class="text-body-sm text-on-surface-variant">137</span>
-<span class="text-body-sm text-on-surface">0.46%</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Performance Chart Card -->
-<div class="metric-card p-xl rounded-2xl">
-<div class="mb-xl">
-<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-[0.1em] mb-xs">Sales Performance</p>
-<h3 class="text-[32px] font-bold text-on-surface">₵29,486.00</h3>
-</div>
-<div class="relative h-[300px] w-full mt-lg">
-<!-- Simple SVG Line Chart -->
-<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 300">
-<!-- Grid Lines -->
-<line stroke="#1f1f1f" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="250" y2="250"></line>
-<line stroke="#1f1f1f" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
-<line stroke="#1f1f1f" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
-<!-- Chart Line -->
-<path class="chart-glow" d="M0,220 L150,210 L300,230 L450,200 L600,180 L750,205 L900,170 L1000,210" fill="none" stroke="#064e3b" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-<!-- Area Fill -->
-<path d="M0,220 L150,210 L300,230 L450,200 L600,180 L750,205 L900,170 L1000,210 L1000,300 L0,300 Z" fill="url(#chartGradient)"></path>
-<defs>
-<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#064e3b" stop-opacity="0.2"></stop>
-<stop offset="100%" stop-color="#064e3b" stop-opacity="0"></stop>
-</linearGradient>
-</defs>
-</svg>
-<!-- Y-Axis Labels -->
-<div class="absolute right-0 top-0 h-full flex flex-col justify-between text-[10px] text-on-surface-variant pr-md py-xs">
-<span class="">6k</span>
-<span class="">4.5k</span>
-<span class="text-on-surface font-bold">3k</span>
-<span class="">2k</span>
-</div>
-</div>
-</div>
-<!-- Recent Orders (Dark Version) -->
-<div class="metric-card rounded-2xl overflow-hidden">
-<div class="p-lg border-b border-outline-variant flex justify-between items-center">
-<h3 class="font-title-md text-on-surface">Recent Activity</h3>
-<button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors">View All</button>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead class="bg-surface-container-high/50 text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">
-<tr>
-<th class="px-lg py-md">ID</th>
-<th class="px-lg py-md">Customer</th>
-<th class="px-lg py-md">Date</th>
-<th class="px-lg py-md">Total</th>
-<th class="px-lg py-md">Status</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant font-body-sm text-on-surface">
-<tr class="hover:bg-surface-container-high/30 transition-colors">
-<td class="px-lg py-md font-medium text-on-surface-variant">#AK-7842</td>
-<td class="px-lg py-md">Abena Mensah</td>
-<td class="px-lg py-md text-on-surface-variant">Oct 24, 2023</td>
-<td class="px-lg py-md font-bold text-primary-fixed-dim">₵450.00</td>
-<td class="px-lg py-md">
-<span class="px-base py-xs bg-primary/20 text-primary-fixed-dim border border-primary/30 rounded-full text-[11px]">Completed</span>
-</td>
-</tr>
-<tr class="hover:bg-surface-container-high/30 transition-colors">
-<td class="px-lg py-md font-medium text-on-surface-variant">#AK-7843</td>
-<td class="px-lg py-md">Kofi Asante</td>
-<td class="px-lg py-md text-on-surface-variant">Oct 25, 2023</td>
-<td class="px-lg py-md font-bold text-primary-fixed-dim">₵1,200.00</td>
-<td class="px-lg py-md">
-<span class="px-base py-xs bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 rounded-full text-[11px]">Processing</span>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<!-- Mobile FAB -->
-<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-2xl shadow-primary/20 flex items-center justify-center active:scale-95 transition-transform z-50">
-<span class="material-symbols-outlined">add</span>
-</button>
-<!-- Bottom Nav Mobile -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full glass-effect border-t border-outline-variant flex justify-around py-sm px-md z-40">
-<a class="flex flex-col items-center gap-xs text-primary" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="text-[10px]">Home</span>
-</a>
-<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">shopping_cart</span>
-<span class="text-[10px]">Orders</span>
-</a>
-<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">analytics</span>
-<span class="text-[10px]">Metrics</span>
-</a>
-<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-[10px]">Settings</span>
-</a>
-</nav>
-</main>
+{% extends "base.html" %}
 
+{% block title %}Dashboard | DABSTELL 15 ENTERPRISE{% endblock %}
 
-</body></html>
+{% block nav %}
+  <nav class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-black">
+    <div class="max-w-7xl mx-auto h-16 px-4 flex items-center justify-between">
+      <a href="{% url 'admindash' %}" class="font-bold text-lg text-emerald-950 dark:text-slate-100">DABSTELL 15 ENTERPRISE</a>
+      <div class="flex items-center gap-3">
+        <a href="{% url 'add_product' %}" class="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">Add Product</a>
+        <a href="/admin/" class="rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Django Admin</a>
+        <a href="{% url 'adminlogout' %}" class="rounded-lg bg-emerald-950 dark:bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">Logout</a>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block messages %}{% endblock %}
+
+{% block content %}
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    {% if messages %}
+      <div class="space-y-2 mb-6">
+        {% for message in messages %}
+          <div class="rounded-lg bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 px-4 py-3">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-emerald-950 dark:text-slate-100">Store Dashboard</h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">Live backend overview for inventory and orders.</p>
+      </div>
+      <a href="{% url 'add_product' %}" class="inline-flex items-center justify-center rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white">
+        + Add Product
+      </a>
+    </div>
+
+    <section class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+      <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-5">
+        <p class="text-sm text-slate-600 dark:text-slate-400">Products</p>
+        <p class="text-3xl font-bold mt-2">{{ product_count }}</p>
+      </div>
+      <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-5">
+        <p class="text-sm text-slate-600 dark:text-slate-400">Active</p>
+        <p class="text-3xl font-bold mt-2">{{ active_product_count }}</p>
+      </div>
+      <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-5">
+        <p class="text-sm text-slate-600 dark:text-slate-400">Orders</p>
+        <p class="text-3xl font-bold mt-2">{{ order_count }}</p>
+      </div>
+      <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-5">
+        <p class="text-sm text-slate-600 dark:text-slate-400">Pending</p>
+        <p class="text-3xl font-bold mt-2">{{ pending_order_count }}</p>
+      </div>
+      <div class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-5">
+        <p class="text-sm text-slate-600 dark:text-slate-400">Revenue</p>
+        <p class="text-3xl font-bold mt-2">GHS {{ revenue }}</p>
+      </div>
+    </section>
+
+    <section class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] overflow-hidden">
+      <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <h2 class="font-semibold text-lg">Recent Orders</h2>
+        <span class="text-sm text-slate-600 dark:text-slate-400">{{ customer_count }} customers</span>
+      </div>
+      {% if recent_orders %}
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="text-left text-slate-600 dark:text-slate-400">
+              <tr>
+                <th class="p-4">Reference</th>
+                <th class="p-4">Customer</th>
+                <th class="p-4">Status</th>
+                <th class="p-4">Payment</th>
+                <th class="p-4 text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in recent_orders %}
+                <tr class="border-t border-slate-200 dark:border-slate-800">
+                  <td class="p-4 font-mono text-xs">{{ order.order_id }}</td>
+                  <td class="p-4">{{ order.customer.full_name }}</td>
+                  <td class="p-4">{{ order.get_status_display }}</td>
+                  <td class="p-4">{{ order.get_payment_status_display }}</td>
+                  <td class="p-4 text-right">GHS {{ order.total_amount }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="p-8 text-center text-slate-600 dark:text-slate-400">No orders yet.</div>
+      {% endif %}
+    </section>
+  </main>
+{% endblock %}

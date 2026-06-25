@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Add Product | DABSTELL 15 ENTERPRISE{% endblock %}
+
+{% block nav %}
+  <nav class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-black">
+    <div class="max-w-3xl mx-auto h-16 px-4 flex items-center justify-between">
+      <a href="{% url 'admindash' %}" class="font-bold text-lg text-emerald-950 dark:text-slate-100">DABSTELL 15 ENTERPRISE</a>
+      <div class="flex items-center gap-3">
+        <a href="{% url 'admindash' %}" class="rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Dashboard</a>
+        <a href="/admin/" class="rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Django Admin</a>
+        <a href="{% url 'adminlogout' %}" class="rounded-lg bg-emerald-950 dark:bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">Logout</a>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block messages %}{% endblock %}
+
+{% block content %}
+  <main class="max-w-3xl mx-auto px-4 py-8">
+    {% if messages %}
+      <div class="space-y-2 mb-6">
+        {% for message in messages %}
+          <div class="rounded-lg bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 px-4 py-3">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="mb-6">
+      <a href="{% url 'admindash' %}" class="text-emerald-900 dark:text-emerald-400 font-semibold text-sm">← Back to dashboard</a>
+      <h1 class="text-3xl font-bold text-emerald-950 dark:text-slate-100 mt-3">Add Product</h1>
+      <p class="text-slate-600 dark:text-slate-400 mt-1">Create a new item for the storefront catalog.</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111] p-6 space-y-5">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-200 px-4 py-3">
+          {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if form.errors and not form.non_field_errors %}
+        <div class="rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-200 px-4 py-3">
+          Please check the highlighted fields below.
+        </div>
+      {% endif %}
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+        {{ form.name }}
+        {% for error in form.name.errors %}
+          <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+        {{ form.category }}
+        {% if form.category.help_text %}
+          <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">{{ form.category.help_text }}</p>
+        {% endif %}
+        {% for error in form.category.errors %}
+          <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+        {{ form.description }}
+        {% for error in form.description.errors %}
+          <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.price.id_for_label }}">{{ form.price.label }}</label>
+          {{ form.price }}
+          {% for error in form.price.errors %}
+            <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.stock.id_for_label }}">{{ form.stock.label }}</label>
+          {{ form.stock }}
+          {% for error in form.stock.errors %}
+            <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
+        {{ form.image }}
+        {% if form.image.help_text %}
+          <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">{{ form.image.help_text }}</p>
+        {% endif %}
+        {% for error in form.image.errors %}
+          <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="flex items-center gap-2">
+        {{ form.is_active }}
+        <label class="text-sm font-semibold" for="{{ form.is_active.id_for_label }}">{{ form.is_active.label }}</label>
+      </div>
+      {% for error in form.is_active.errors %}
+        <p class="text-sm text-red-700 dark:text-red-400">{{ error }}</p>
+      {% endfor %}
+
+      <div class="flex gap-3 pt-2 border-t border-slate-200 dark:border-slate-800">
+        <button type="submit" class="rounded-lg bg-emerald-700 px-5 py-3 font-semibold text-white hover:bg-emerald-800">Save Product</button>
+        <a href="{% url 'admindash' %}" class="rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-3 font-semibold">Cancel</a>
+      </div>
+    </form>
+  </main>
+{% endblock %}

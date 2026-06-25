@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}DABSTELL 15 ENTERPRISE{% endblock %}</title>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("technoblade-theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved === "light" || saved === "dark" ? saved : (prefersDark ? "dark" : "light");
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = { darkMode: "class" };
+  </script>
+  <script src="{% static 'js/theme.js' %}" defer></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-[#f8faf6] dark:bg-[#0a0a0a] text-[#191c1b] dark:text-slate-100 min-h-screen {% block body_class %}{% endblock %}">
+  {% block nav %}{% endblock %}
+
+  {% block messages %}
+    {% if messages %}
+      <div class="{% block messages_wrapper_class %}max-w-7xl mx-auto px-4 pt-4{% endblock %}">
+        <div class="space-y-2">
+          {% for message in messages %}
+            <div class="rounded-lg bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 px-4 py-3">{{ message }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endblock %}
+
+  {% block content %}{% endblock %}
+
+  <button
+    type="button"
+    onclick="toggleTheme()"
+    class="fixed bottom-5 right-5 z-50 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#111] px-4 py-2 text-sm font-semibold shadow-lg hover:border-emerald-700 dark:hover:border-emerald-500"
+    aria-label="Toggle dark mode"
+  >
+    <span data-theme-label>Dark mode</span>
+  </button>
+</body>
+</html>

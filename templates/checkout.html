@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout | DABSTELL 15 ENTERPRISE{% endblock %}
+
+{% block content %}
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <a href="{% url 'shoppingcart' %}" class="text-emerald-900 dark:text-emerald-400 font-semibold">Back to cart</a>
+    <h1 class="text-3xl font-bold text-emerald-950 dark:text-slate-100 mt-4 mb-6">Checkout</h1>
+
+    <div class="grid lg:grid-cols-[1fr_320px] gap-6">
+      <form method="post" class="bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 rounded-lg p-5 space-y-4">
+        {% csrf_token %}
+        {% if form.errors %}
+          <div class="rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-200 px-4 py-3">
+            Please check the highlighted fields.
+          </div>
+        {% endif %}
+
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.full_name.id_for_label }}">Full name</label>
+          {{ form.full_name }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.phone.id_for_label }}">Phone</label>
+          {{ form.phone }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.address.id_for_label }}">Delivery address</label>
+          {{ form.address }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.location.id_for_label }}">Location</label>
+          {{ form.location }}
+        </div>
+        <div>
+          <label class="block text-sm font-semibold mb-1" for="{{ form.notes.id_for_label }}">Order notes</label>
+          {{ form.notes }}
+        </div>
+
+        <button class="w-full rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white py-3 font-semibold">Place Order</button>
+      </form>
+
+      <aside class="bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 rounded-lg p-5 h-fit">
+        <h2 class="font-semibold text-lg mb-4">Summary</h2>
+        <div class="space-y-3">
+          {% for line in cart_lines %}
+            <div class="flex justify-between gap-3 text-sm">
+              <span>{{ line.quantity }} x {{ line.product.name }}</span>
+              <span>GHS {{ line.subtotal }}</span>
+            </div>
+          {% endfor %}
+          <div class="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2">
+            <div class="flex justify-between text-sm"><span>Delivery</span><span>GHS {{ delivery_fee }}</span></div>
+            <div class="flex justify-between font-bold text-lg"><span>Total</span><span>GHS {{ cart_total }}</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+{% endblock %}

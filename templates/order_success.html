@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Order Placed | DABSTELL 15 ENTERPRISE{% endblock %}
+
+{% block content %}
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <section class="bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 rounded-lg p-6">
+      <p class="text-emerald-700 dark:text-emerald-400 font-semibold">Order placed</p>
+      <h1 class="text-3xl font-bold text-emerald-950 dark:text-slate-100 mt-2">Thank you, {{ order.customer.full_name }}</h1>
+      <p class="text-slate-600 dark:text-slate-400 mt-2">Your order reference is {{ order.order_id }}.</p>
+
+      <div class="mt-6 border-t border-slate-200 dark:border-slate-800 pt-5 space-y-3">
+        {% for item in order.items.all %}
+          <div class="flex justify-between gap-3">
+            <span>{{ item.quantity }} x {{ item.product_name }}</span>
+            <span>GHS {{ item.subtotal }}</span>
+          </div>
+        {% endfor %}
+        <div class="border-t border-slate-200 dark:border-slate-800 pt-3 flex justify-between font-bold text-lg">
+          <span>Total</span>
+          <span>GHS {{ order.total_amount }}</span>
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-3">
+        <a href="{% url 'client' %}" class="rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white px-5 py-3 font-semibold">Continue Shopping</a>
+        <a href="{% url 'shoppingcart' %}" class="rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-3 font-semibold">View Cart</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

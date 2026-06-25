@@ -15,9 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.contrib import messages
+from django.http import HttpResponseForbidden
+from django.shortcuts import redirect
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django_ratelimit.exceptions import Ratelimited
+
+
+def handler403(request, exception=None):
+    if isinstance(exception, Ratelimited):
+        messages.error(request, "Too many requests. Please wait a moment and try again.")
+        return redirect(request.META.get("HTTP_REFERER") or "client")
+    return HttpResponseForbidden()
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),\
+    path('admin/', admin.site.urls),
     path('', include('technomom.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
