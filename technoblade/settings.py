@@ -36,8 +36,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -157,3 +157,4 @@ CACHES = {
 }
 
 CACHE_TIMEOUT = 300  # seconds
+
