@@ -6,10 +6,12 @@
   <nav class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-black">
     <div class="max-w-7xl mx-auto h-16 px-4 flex items-center justify-between">
       <a href="{% url 'admindash' %}" class="font-bold text-lg text-emerald-950 dark:text-slate-100">DABSTELL 15 ENTERPRISE</a>
+      <h2 class="font-bold text-lg text-emerald-950 dark:text-slate-100" >welcome {{ request.user.username }}<h2>
       <div class="flex items-center gap-3">
         <a href="{% url 'add_product' %}" class="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">Add Product</a>
         <a href="/admin/" class="rounded-lg border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold">Django Admin</a>
         <a href="{% url 'adminlogout' %}" class="rounded-lg bg-emerald-950 dark:bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">Logout</a>
+         <a href="{% url 'client' %}" class="rounded-lg bg-emerald-950 dark:bg-emerald-700 px-4 py-2 text-sm font-semibold text-white">BACK TO MAIN PAGE</a>
       </div>
     </div>
   </nav>
@@ -85,14 +87,19 @@
                   <td class="p-4">{{ order.get_status_display }}</td>
                   <td class="p-4">{{ order.get_payment_status_display }}</td>
                   <td class="p-4 text-right">GHS {{ order.total_amount }}</td>
+                    
                 </tr>
+                
               {% endfor %}
             </tbody>
           </table>
         </div>
+      
       {% else %}
         <div class="p-8 text-center text-slate-600 dark:text-slate-400">No orders yet.</div>
       {% endif %}
-    </section>
+    </section> 
+  <i><address style="text-align:center;">   © 2026 SCANCOAT SYSTEMS NK </address></i>
   </main>
+    
 {% endblock %}
