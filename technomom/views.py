@@ -119,8 +119,8 @@ def productdetail(request, pk=None):
     }
     return render(request, "productdetail.html", context)
 
-
-def shopppingcart(request):
+@ratelimit(key="ip", rate="30/m", method="POST", block=True)
+def shoppingcart(request):
     return render(request, "shoppingcart.html", _cart_summary(request))
 
 
@@ -132,12 +132,12 @@ def add_to_cart(request, product_id):
     size = (request.POST.get("size") or "").upper()
 
     if size not in dict(Product.SIZE_CHOICES):
-        messages.error(request,"Please select a valid size.")
+        messages.error(request, "Please select a valid size.")
         return redirect(product.get_absolute_url())
 
     available_stock = product.get_stock_for_size(size)
     if available_stock <= 0:
-        messages.error(f"{product.name} is currently out of stock in {size}.")
+        messages.error(request, f"{product.name} is currently out of stock in {size}.")
         return redirect(product.get_absolute_url())
 
     cart = _cart(request)
@@ -147,14 +147,15 @@ def add_to_cart(request, product_id):
         current_line = {"quantity": current_line, "size": size}
     current_quantity = _positive_int(current_line.get("quantity"), default=0)
     new_quantity = min(available_stock, current_quantity + quantity)
+    added = new_quantity - current_quantity
+
     cart[line_key] = {"quantity": new_quantity, "size": size}
     product.size_stock = dict(product.size_stock or {})
-    product.size_stock[size] = max(0, product.get_stock_for_size(size) - quantity)
+    product.size_stock[size] = max(0, available_stock - added)
     product.save(update_fields=["size_stock", "stock", "updated_at"])
     _save_cart(request, cart)
     messages.success(request, f"{product.name} ({size}) was added to your cart.")
     return redirect(request.POST.get("next") or "shoppingcart")
-
 
 @ratelimit(key="ip", rate="30/m", method="POST", block=True)
 @require_POST
