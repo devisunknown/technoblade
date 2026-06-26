@@ -166,7 +166,6 @@ def remove_from_cart(request, product_id):
     messages.info(request, f"{product.name} was removed from your cart.")
     return redirect("shoppingcart")
 
-
 @ratelimit(key="ip", rate="10/h", method="POST", block=True)
 def checkout(request):
     summary = _cart_summary(request)
@@ -200,7 +199,7 @@ def checkout(request):
 
         _save_cart(request, {})
         messages.success(request, f"Order {order.order_id} has been placed.")
-       return redirect('initiate_payment', order_id=order.order_id)
+        return redirect('initiate_payment', order_id=order.order_id)
 
     return render(request, "checkout.html", {**summary, "form": form})
 
