@@ -240,13 +240,14 @@ def checkout(request):
 @transaction.atomic
 def _create_order(request, customer_data):
     cart = _cart(request)
-    product_ids = [int(product_id) for product_id in cart.keys()]
+    product_ids = [
+        int(str(line_key).split(":", 1)[0])
+        for line_key in cart.keys()
+        if str(line_key).split(":", 1)[0].isdigit()
+    ]
     products = Product.objects.select_for_update().filter(id__in=product_ids, is_active=True)
     product_map = {str(product.id): product for product in products}
-
-    if not product_map:
-        raise ValueError("Your cart does not contain available products.")
-
+    
     customer = _get_or_create_customer(request, customer_data)
     order = Order.objects.create(
         customer=customer,
