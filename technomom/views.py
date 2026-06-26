@@ -10,6 +10,7 @@ from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from django_ratelimit.decorators import ratelimit
+import requests
 
 from .cache_utils import get_categories, get_product_detail, get_product_list
 from .forms import AdminSignupForm, CheckoutForm, ProductForm
@@ -366,3 +367,54 @@ def resetpass(request):
         return redirect("adminlog")
 
     return render(request, "resetpassword.html")
+
+
+
+
+def initiate_payment(request, order_id):
+    order = get_object_or_404(Order, order_id=order_id)
+
+    url = "https://api.paystack.co/transaction/initialize"
+    headers = {"Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"}
+    data = {
+        "email": order.customer.email or order.customer.user.email,
+        "amount": int(order.total_amount * 100),
+        "currency": "GHS",
+        "callback_url": request.build_absolute_uri('/payment/verify/'),
+        "metadata": {"order_id": str(order.order_id)},
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    res_data = response.json()
+
+    if res_data.get('status'):
+        order.payment_reference = res_data['data']['reference']
+        order.save()
+        return redirect(res_data['data']['authorization_url'])
+    else:
+        return redirect('checkout')
+
+
+def verify_payment(request):
+    reference = request.GET.get('reference')
+    url = f"https://api.paystack.co/transaction/verify/{reference}"
+    headers = {"Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"}
+
+    response = requests.get(url, headers=headers)
+    res_data = response.json()
+
+    if res_data['data']['status'] == 'success':
+        order_id = res_data['data']['metadata']['order_id']
+        order = get_object_or_404(Order, order_id=order_id)
+        order.payment_status = Order.PAYMENT_PAID
+        order.status = Order.STATUS_CONFIRMED
+        order.save()
+        return redirect('order_success')
+    else:
+        order_id = res_data['data']['metadata'].get('order_id')
+        if order_id:
+            order = Order.objects.filter(order_id=order_id).first()
+            if order:
+                order.payment_status = Order.PAYMENT_FAILED
+                order.save()
+        return redirect('payment_failed')

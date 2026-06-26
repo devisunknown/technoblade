@@ -41,7 +41,7 @@
           {{ form.notes }}
         </div>
 
-        <button class="w-full rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white py-3 font-semibold">Place Order</button>
+        <button class="w-full rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white py-3 font-semibold"><a href="{% url 'initiate_payment' order.order_id %}">Pay with Paystack</a>/button>
       </form>
 
       <aside class="bg-white dark:bg-[#111] border border-slate-200 dark:border-slate-800 rounded-lg p-5 h-fit">

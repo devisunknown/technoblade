@@ -20,4 +20,6 @@ urlpatterns = [
     path("admindash/products/add/", views.add_product, name="add_product"),
     path("adminsignup", views.adminsignup, name="adminsignup"),
     path("resetpassword", views.resetpass, name="resetpassword"),
+    path('payment/initiate/<uuid:order_id>/', views.initiate_payment, name='initiate_payment'),
+    path('payment/verify/', views.verify_payment, name='verify_payment'),
 ]
