@@ -37,14 +37,19 @@ def _save_cart(request, cart):
 
 
 def _cart_lines(cart):
-    product_ids = [int(product_id) for product_id in cart.keys() if str(product_id).isdigit()]
+    product_ids = []
+    for line_key in cart.keys():
+        raw_id = str(line_key).split(":", 1)[0]
+        if raw_id.isdigit():
+            product_ids.append(int(raw_id))
+
     products = Product.objects.filter(id__in=product_ids, is_active=True).select_related("category")
     product_map = {str(product.id): product for product in products}
     lines = []
 
-    for product_id, line_data in cart.items():
+    for line_key, line_data in cart.items():
         if isinstance(line_data, dict):
-            product_id = str(product_id)
+            product_id = str(line_key).split(":", 1)[0]
             product = product_map.get(product_id)
             if not product:
                 continue
