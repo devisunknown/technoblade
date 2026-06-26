@@ -132,7 +132,7 @@ def add_to_cart(request, product_id):
     size = (request.POST.get("size") or "").upper()
 
     if size not in dict(Product.SIZE_CHOICES):
-        messages.error("Please select a valid size.")
+        messages.error(request,"Please select a valid size.")
         return redirect(product.get_absolute_url())
 
     available_stock = product.get_stock_for_size(size)
