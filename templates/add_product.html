@@ -84,12 +84,20 @@
           {% endfor %}
         </div>
         <div>
-          <label class="block text-sm font-semibold mb-1" for="{{ form.stock.id_for_label }}">{{ form.stock.label }}</label>
-          {{ form.stock }}
-          {% for error in form.stock.errors %}
+          <label class="block text-sm font-semibold mb-1" for="{{ form.size.id_for_label }}">{{ form.size.label }}</label>
+          {{ form.size }}
+          {% for error in form.size.errors %}
             <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
           {% endfor %}
         </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="{{ form.stock.id_for_label }}">{{ form.stock.label }}</label>
+        {{ form.stock }}
+        {% for error in form.stock.errors %}
+          <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
+        {% endfor %}
       </div>
 
       <div>

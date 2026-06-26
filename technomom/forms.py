@@ -42,12 +42,13 @@ class CheckoutForm(forms.Form):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ["name", "category", "description", "price", "stock", "image", "is_active"]
+        fields = ["name", "category", "description", "price", "size", "stock", "image", "is_active"]
         labels = {
             "name": "Product name",
             "category": "Category",
             "description": "Description",
             "price": "Price (GHS)",
+            "size": "Size",
             "stock": "Stock quantity",
             "image": "Product image",
             "is_active": "Visible on storefront",
@@ -60,6 +61,7 @@ class ProductForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"rows": 4}),
             "is_active": forms.CheckboxInput(),
             "price": forms.NumberInput(attrs={"step": "0.01", "min": "0.01"}),
+            "size": forms.Select(choices=Product.SIZE_CHOICES),
             "stock": forms.NumberInput(attrs={"min": "0"}),
         }
 

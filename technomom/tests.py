@@ -117,6 +117,7 @@ class AddProductTests(TestCase):
                 "description": "Ergonomic wireless mouse",
                 "price": "45.00",
                 "stock": "12",
+                "size": "M",
                 "is_active": "on",
             },
             follow=False,
@@ -129,6 +130,7 @@ class AddProductTests(TestCase):
         self.assertEqual(product.category, self.category)
         self.assertEqual(product.price, Decimal("45.00"))
         self.assertEqual(product.stock, 12)
+        self.assertEqual(product.size, "M")
         self.assertTrue(product.is_active)
         self.assertEqual(product.slug, "wireless-mouse")
 

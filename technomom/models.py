@@ -27,6 +27,13 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    SIZE_CHOICES = [
+        ("S", "S"),
+        ("M", "M"),
+        ("L", "L"),
+        ("XL", "XL"),
+    ]
+
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     category = models.ForeignKey(
@@ -42,6 +49,7 @@ class Product(models.Model):
         decimal_places=2,
         validators=[MinValueValidator(Decimal("0.01"))],
     )
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True)
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
