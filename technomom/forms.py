@@ -40,16 +40,19 @@ class CheckoutForm(forms.Form):
 
 
 class ProductForm(forms.ModelForm):
+    size_s_stock = forms.IntegerField(required=False, min_value=0, initial=0)
+    size_m_stock = forms.IntegerField(required=False, min_value=0, initial=0)
+    size_l_stock = forms.IntegerField(required=False, min_value=0, initial=0)
+    size_xl_stock = forms.IntegerField(required=False, min_value=0, initial=0)
+
     class Meta:
         model = Product
-        fields = ["name", "category", "description", "price", "size", "stock", "image", "is_active"]
+        fields = ["name", "category", "description", "price", "image", "is_active"]
         labels = {
             "name": "Product name",
             "category": "Category",
             "description": "Description",
             "price": "Price (GHS)",
-            "size": "Size",
-            "stock": "Stock quantity",
             "image": "Product image",
             "is_active": "Visible on storefront",
         }
@@ -61,14 +64,14 @@ class ProductForm(forms.ModelForm):
             "description": forms.Textarea(attrs={"rows": 4}),
             "is_active": forms.CheckboxInput(),
             "price": forms.NumberInput(attrs={"step": "0.01", "min": "0.01"}),
-            "size": forms.Select(choices=Product.SIZE_CHOICES),
-            "stock": forms.NumberInput(attrs={"min": "0"}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["category"].empty_label = "No category"
         self.fields["is_active"].initial = True
+        for name in ["size_s_stock", "size_m_stock", "size_l_stock", "size_xl_stock"]:
+            self.fields[name].widget.attrs.update({"class": INPUT_CLASS, "min": "0"})
         for field in self.fields.values():
             if isinstance(field.widget, forms.CheckboxInput):
                 field.widget.attrs.update(
@@ -76,3 +79,15 @@ class ProductForm(forms.ModelForm):
                 )
             else:
                 field.widget.attrs.update({"class": INPUT_CLASS})
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.size_stock = {
+            "S": self.cleaned_data.get("size_s_stock") or 0,
+            "M": self.cleaned_data.get("size_m_stock") or 0,
+            "L": self.cleaned_data.get("size_l_stock") or 0,
+            "XL": self.cleaned_data.get("size_xl_stock") or 0,
+        }
+        if commit:
+            instance.save()
+        return instance

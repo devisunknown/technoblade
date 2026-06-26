@@ -116,8 +116,10 @@ class AddProductTests(TestCase):
                 "category": self.category.id,
                 "description": "Ergonomic wireless mouse",
                 "price": "45.00",
-                "stock": "12",
-                "size": "M",
+                "size_s_stock": "3",
+                "size_m_stock": "5",
+                "size_l_stock": "0",
+                "size_xl_stock": "0",
                 "is_active": "on",
             },
             follow=False,
@@ -129,10 +131,26 @@ class AddProductTests(TestCase):
         product = Product.objects.get(name="Wireless Mouse")
         self.assertEqual(product.category, self.category)
         self.assertEqual(product.price, Decimal("45.00"))
-        self.assertEqual(product.stock, 12)
-        self.assertEqual(product.size, "M")
+        self.assertEqual(product.stock, 8)
+        self.assertEqual(product.size_stock, {"S": 3, "M": 5, "L": 0, "XL": 0})
         self.assertTrue(product.is_active)
         self.assertEqual(product.slug, "wireless-mouse")
+
+    def test_add_to_cart_with_size_reduces_matching_stock(self):
+        self.product = Product.objects.create(
+            name="Size Product",
+            price=Decimal("20.00"),
+            size_stock={"S": 4, "M": 2, "L": 0, "XL": 0},
+            is_active=True,
+        )
+        self.client.post(
+            reverse("add_to_cart", args=[self.product.id]),
+            {"quantity": 2, "size": "M"},
+        )
+
+        self.product.refresh_from_db()
+        self.assertEqual(self.product.get_stock_for_size("M"), 0)
+        self.assertEqual(self.product.stock, 4)
 
     def test_add_product_post_with_image(self):
         self.client.login(username="storeadmin", password="adminpass123")

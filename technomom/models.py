@@ -50,6 +50,7 @@ class Product(models.Model):
         validators=[MinValueValidator(Decimal("0.01"))],
     )
     size = models.CharField(max_length=10, choices=SIZE_CHOICES, blank=True)
+    size_stock = models.JSONField(default=dict, blank=True)
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -62,10 +63,38 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if isinstance(self.size_stock, dict):
+            normalized = {}
+            for size, quantity in self.size_stock.items():
+                if size in dict(self.SIZE_CHOICES):
+                    normalized[size] = max(0, int(quantity or 0))
+            self.size_stock = normalized
+            self.stock = sum(normalized.values())
+        else:
+            self.stock = max(0, int(self.stock or 0))
+
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("productdetail", kwargs={"pk": self.pk})
+
+    def get_stock_for_size(self, size):
+        if not size:
+            return self.stock
+        if not isinstance(self.size_stock, dict):
+            return 0
+        return max(0, int(self.size_stock.get(size, 0) or 0))
+
+    @property
+    def available_sizes_with_stock(self):
+        if not isinstance(self.size_stock, dict):
+            return []
+        return [
+            (size, label, self.get_stock_for_size(size))
+            for size, label in self.SIZE_CHOICES
+            if self.get_stock_for_size(size) > 0
+        ]
 
     @property
     def in_stock(self):

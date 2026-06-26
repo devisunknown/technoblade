@@ -75,29 +75,37 @@
         {% endfor %}
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-semibold mb-1" for="{{ form.price.id_for_label }}">{{ form.price.label }}</label>
-          {{ form.price }}
-          {% for error in form.price.errors %}
-            <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
-          {% endfor %}
-        </div>
-        <div>
-          <label class="block text-sm font-semibold mb-1" for="{{ form.size.id_for_label }}">{{ form.size.label }}</label>
-          {{ form.size }}
-          {% for error in form.size.errors %}
-            <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
-          {% endfor %}
-        </div>
-      </div>
-
       <div>
-        <label class="block text-sm font-semibold mb-1" for="{{ form.stock.id_for_label }}">{{ form.stock.label }}</label>
-        {{ form.stock }}
-        {% for error in form.stock.errors %}
+        <label class="block text-sm font-semibold mb-1" for="{{ form.price.id_for_label }}">{{ form.price.label }}</label>
+        {{ form.price }}
+        {% for error in form.price.errors %}
           <p class="text-sm text-red-700 dark:text-red-400 mt-1">{{ error }}</p>
         {% endfor %}
+      </div>
+
+      <div class="rounded-lg border border-slate-200 dark:border-slate-700 p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold">Stock by size</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Enter how many units are available for each size.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1" for="{{ form.size_s_stock.id_for_label }}">Small (S)</label>
+            {{ form.size_s_stock }}
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1" for="{{ form.size_m_stock.id_for_label }}">Medium (M)</label>
+            {{ form.size_m_stock }}
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1" for="{{ form.size_l_stock.id_for_label }}">Large (L)</label>
+            {{ form.size_l_stock }}
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1" for="{{ form.size_xl_stock.id_for_label }}">Extra Large (XL)</label>
+            {{ form.size_xl_stock }}
+          </div>
+        </div>
       </div>
 
       <div>

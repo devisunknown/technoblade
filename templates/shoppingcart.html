@@ -30,6 +30,9 @@
                   <div>
                     <a href="{{ line.product.get_absolute_url }}" class="font-semibold hover:text-emerald-800 dark:hover:text-emerald-400">{{ line.product.name }}</a>
                     <p class="text-sm text-slate-600 dark:text-slate-400">GHS {{ line.product.price }} each</p>
+                    {% if line.size %}
+                      <p class="text-sm text-emerald-700 dark:text-emerald-400">Size: {{ line.size }}</p>
+                    {% endif %}
                   </div>
                   <form action="{% url 'remove_from_cart' line.product.id %}" method="post">
                     {% csrf_token %}

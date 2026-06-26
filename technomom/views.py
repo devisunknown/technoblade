@@ -37,23 +37,27 @@ def _save_cart(request, cart):
 
 
 def _cart_lines(cart):
-    product_ids = [int(product_id) for product_id in cart.keys()]
+    product_ids = [int(product_id) for product_id in cart.keys() if str(product_id).isdigit()]
     products = Product.objects.filter(id__in=product_ids, is_active=True).select_related("category")
     product_map = {str(product.id): product for product in products}
     lines = []
 
-    for product_id, quantity in cart.items():
-        product = product_map.get(str(product_id))
-        if not product:
-            continue
-        quantity = max(1, _positive_int(quantity))
-        lines.append(
-            {
-                "product": product,
-                "quantity": quantity,
-                "subtotal": product.price * quantity,
-            }
-        )
+    for product_id, line_data in cart.items():
+        if isinstance(line_data, dict):
+            product_id = str(product_id)
+            product = product_map.get(product_id)
+            if not product:
+                continue
+            quantity = max(1, _positive_int(line_data.get("quantity")))
+            size = line_data.get("size") or ""
+            lines.append(
+                {
+                    "product": product,
+                    "quantity": quantity,
+                    "size": size,
+                    "subtotal": product.price * quantity,
+                }
+            )
     return lines
 
 
@@ -125,16 +129,30 @@ def shopppingcart(request):
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id, is_active=True)
     quantity = max(1, _positive_int(request.POST.get("quantity"), default=1))
+    size = (request.POST.get("size") or "").upper()
 
-    if not product.in_stock:
-        messages.error(request, f"{product.name} is currently out of stock.")
+    if size not in dict(Product.SIZE_CHOICES):
+        messages.error("Please select a valid size.")
+        return redirect(product.get_absolute_url())
+
+    available_stock = product.get_stock_for_size(size)
+    if available_stock <= 0:
+        messages.error(f"{product.name} is currently out of stock in {size}.")
         return redirect(product.get_absolute_url())
 
     cart = _cart(request)
-    current_quantity = int(cart.get(str(product.id), 0))
-    cart[str(product.id)] = min(product.stock, current_quantity + quantity)
+    line_key = f"{product.id}:{size}"
+    current_line = cart.get(line_key, {})
+    if isinstance(current_line, int):
+        current_line = {"quantity": current_line, "size": size}
+    current_quantity = _positive_int(current_line.get("quantity"), default=0)
+    new_quantity = min(available_stock, current_quantity + quantity)
+    cart[line_key] = {"quantity": new_quantity, "size": size}
+    product.size_stock = dict(product.size_stock or {})
+    product.size_stock[size] = max(0, product.get_stock_for_size(size) - quantity)
+    product.save(update_fields=["size_stock", "stock", "updated_at"])
     _save_cart(request, cart)
-    messages.success(request, f"{product.name} was added to your cart.")
+    messages.success(request, f"{product.name} ({size}) was added to your cart.")
     return redirect(request.POST.get("next") or "shoppingcart")
 
 
@@ -143,13 +161,16 @@ def add_to_cart(request, product_id):
 def update_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id, is_active=True)
     quantity = _positive_int(request.POST.get("quantity"), default=0)
+    size = (request.POST.get("size") or "").upper()
     cart = _cart(request)
+    line_key = f"{product.id}:{size}" if size else str(product.id)
 
     if quantity == 0:
-        cart.pop(str(product.id), None)
+        cart.pop(line_key, None)
         messages.info(request, f"{product.name} was removed from your cart.")
     else:
-        cart[str(product.id)] = min(product.stock, quantity)
+        available_stock = product.get_stock_for_size(size) if size else product.stock
+        cart[line_key] = {"quantity": min(available_stock, quantity), "size": size}
         messages.success(request, f"{product.name} quantity was updated.")
 
     _save_cart(request, cart)
@@ -161,7 +182,9 @@ def update_cart(request, product_id):
 def remove_from_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     cart = _cart(request)
-    cart.pop(str(product.id), None)
+    size = (request.POST.get("size") or "").upper()
+    line_key = f"{product.id}:{size}" if size else str(product.id)
+    cart.pop(line_key, None)
     _save_cart(request, cart)
     messages.info(request, f"{product.name} was removed from your cart.")
     return redirect("shoppingcart")
@@ -222,11 +245,36 @@ def _create_order(request, customer_data):
     )
 
     total = Decimal("0.00")
-    for product_id, quantity in cart.items():
-        product = product_map.get(str(product_id))
+    for line_key, line_data in cart.items():
+        if isinstance(line_data, dict):
+            product_id = str(line_key).split(":", 1)[0]
+            size = (line_data.get("size") or "").upper()
+            product = product_map.get(product_id)
+            if not product:
+                continue
+            quantity = max(1, _positive_int(line_data.get("quantity")))
+            available_stock = product.get_stock_for_size(size)
+            if quantity > available_stock:
+                raise ValueError(f"Only {available_stock} of {product.name} ({size}) is available.")
+
+            OrderItem.objects.create(
+                order=order,
+                product=product,
+                product_name=f"{product.name} ({size})",
+                quantity=quantity,
+                price=product.price,
+            )
+            new_size_stock = dict(product.size_stock or {})
+            new_size_stock[size] = max(0, new_size_stock.get(size, 0) - quantity)
+            product.size_stock = new_size_stock
+            product.save(update_fields=["size_stock", "stock", "updated_at"])
+            total += product.price * quantity
+            continue
+
+        product = product_map.get(str(line_key))
         if not product:
             continue
-        quantity = max(1, _positive_int(quantity))
+        quantity = max(1, _positive_int(line_data))
         if quantity > product.stock:
             raise ValueError(f"Only {product.stock} of {product.name} is available.")
 

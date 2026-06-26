@@ -33,13 +33,23 @@
         </p>
         <p class="text-slate-700 dark:text-slate-300 leading-7">{{ product.description|default:"No description has been added for this product yet." }}</p>
 
-        <form action="{% url 'add_to_cart' product.id %}" method="post" class="flex flex-col sm:flex-row gap-3">
+        <form action="{% url 'add_to_cart' product.id %}" method="post" class="flex flex-col gap-3">
           {% csrf_token %}
           <input type="hidden" name="next" value="{% url 'shoppingcart' %}">
-          <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="rounded-lg border-slate-300 dark:border-slate-700 dark:bg-[#111] dark:text-slate-100 w-28" {% if not product.in_stock %}disabled{% endif %}>
-          <button class="flex-1 rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white py-3 font-semibold disabled:opacity-50" {% if not product.in_stock %}disabled{% endif %}>
-            Add to Cart
-          </button>
+          <label class="text-sm font-semibold">Choose size</label>
+          <select name="size" class="rounded-lg border-slate-300 dark:border-slate-700 dark:bg-[#111] dark:text-slate-100" {% if not product.in_stock %}disabled{% endif %}>
+            {% for size, label, stock in product.available_sizes_with_stock %}
+              <option value="{{ size }}">{{ label }} - {{ stock }} available</option>
+            {% empty %}
+              <option value="">No size available</option>
+            {% endfor %}
+          </select>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="rounded-lg border-slate-300 dark:border-slate-700 dark:bg-[#111] dark:text-slate-100 w-28" {% if not product.in_stock %}disabled{% endif %}>
+            <button class="flex-1 rounded-lg bg-emerald-950 dark:bg-emerald-700 text-white py-3 font-semibold disabled:opacity-50" {% if not product.in_stock %}disabled{% endif %}>
+              Add to Cart
+            </button>
+          </div>
         </form>
       </section>
     </div>
