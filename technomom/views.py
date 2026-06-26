@@ -190,11 +190,15 @@ def remove_from_cart(request, product_id):
     cart = _cart(request)
     size = (request.POST.get("size") or "").upper()
     line_key = f"{product.id}:{size}" if size else str(product.id)
-    cart.pop(line_key, None)
-    _save_cart(request, cart)
-    messages.info(request, f"{product.name} was removed from your cart.")
-    return redirect("shoppingcart")
 
+    if line_key in cart:
+        cart.pop(line_key, None)
+        _save_cart(request, cart)
+        messages.info(request, f"{product.name} was removed from your cart.")
+    else:
+        messages.error(request, f"Could not find {product.name} ({size}) in your cart.")
+
+    return redirect("shoppingcart")
 @ratelimit(key="ip", rate="10/h", method="POST", block=True)
 def checkout(request):
     summary = _cart_summary(request)

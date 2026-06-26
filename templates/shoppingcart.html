@@ -36,12 +36,14 @@
                   </div>
                   <form action="{% url 'remove_from_cart' line.product.id %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="size" value="{{ line.size }}">
                     <button class="text-red-700 dark:text-red-400 text-sm font-semibold">Remove</button>
                   </form>
                 </div>
                 <div class="mt-4 flex items-center justify-between gap-3">
                   <form action="{% url 'update_cart' line.product.id %}" method="post" class="flex items-center gap-2">
                     {% csrf_token %}
+                    <input type="hidden" name="size" value="{{ line.size }}">
                     <input type="number" name="quantity" value="{{ line.quantity }}" min="0" max="{{ line.product.stock }}" class="w-24 rounded-lg border-slate-300 dark:border-slate-700 dark:bg-[#111] dark:text-slate-100">
                     <button class="rounded-lg border border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold">Update</button>
                   </form>
