@@ -408,7 +408,7 @@ def verify_payment(request):
         order.payment_status = Order.PAYMENT_PAID
         order.status = Order.STATUS_CONFIRMED
         order.save()
-        return redirect('order_success')
+        return redirect('order_success',order_id=order_id)
     else:
         order_id = res_data['data']['metadata'].get('order_id')
         if order_id:
