@@ -200,7 +200,7 @@ def checkout(request):
 
         _save_cart(request, {})
         messages.success(request, f"Order {order.order_id} has been placed.")
-        return redirect("order_success", order_id=order.order_id)
+       return redirect('initiate_payment', order_id=order.order_id)
 
     return render(request, "checkout.html", {**summary, "form": form})
 
